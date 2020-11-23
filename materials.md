@@ -6,3 +6,4 @@ A list of useful and interesting resources encountered during research:
     * SNNs: https://en.wikipedia.org/wiki/Spiking_neural_network
     * Overview: https://www.youtube.com/watch?v=yfnJqVHmJEw
 * Phenomenal course in Reinforcement Learning: https://www.youtube.com/playlist?list=PLqYmG7hTraZBKeNJ-JE_eyJHZ7XgBoAyb
+* Open Deep Learning and Reinforcement Learning lectures from top Universities like Stanford University, MIT, UC Berkeley: https://github.com/Machine-Learning-Tokyo/AI_Curriculum
