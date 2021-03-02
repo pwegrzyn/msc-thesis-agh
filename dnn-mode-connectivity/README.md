@@ -9,9 +9,8 @@ by Timur Garipov, Pavel Izmailov, Dmitrii Podoprikhin, Dmitry Vetrov and Andrew 
 Later work on the baseline code has been made by Patryk Wegrzyn as part of Master's Thesis.
 
 
-# Dependencies
-* [PyTorch](http://pytorch.org/) - tested on Python 3.8, CUDA 10.1, PyTorch 1.7
-* [tabulate](https://pypi.python.org/pypi/tabulate/) - version doesn't really matter
+# Tested environment and dependencies
+* [PyTorch](http://pytorch.org/) - tested on Python 3.8, CUDA 10.1, PyTorch 1.7 (later switched to Py3.8, CUDA 11.0.2, cuDNN 8.1.0, PyTorch 1.7.1)
 
 ## Important info regarding PyTorch version
 The initial code was probably developed under a version of Python that was below 3.7, since the name ```async``` was used as an identifier and since Py3.7
@@ -29,6 +28,20 @@ and this causes issues with Torch's Multiprocessing Loaders - to fix this all ma
 
 Lastly, the initial version of the code has some problems with GPU memory management. So for example if you have a 4GB GPU, you will need to use a smaller 
 batch_size (probably 32 or less) to avoid getting an OOM error.
+
+## Preparing to run
+
+(Better to run all of this in an admin command line) First, create a venv and activate it
+```
+python -m venv env
+.\env\Scripts\activate
+```
+Then you can install the requirements.
+
+To deactivate the environment
+```
+deactivate
+```
 
 # Usage
 

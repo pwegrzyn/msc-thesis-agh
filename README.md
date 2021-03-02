@@ -2,8 +2,7 @@
 Repository containing resources from my Master's Thesis at AGH-UST.
 
 Contents:
-* ```dnn-mode-connectivity``` - clone of https://github.com/timgaripov/dnn-mode-connectivity with applied changes to make it run
-* ```dnn-mode-connectivity-tf``` - custom implementation of software in TensorFlow to allow finding loss surface micro and macro structures with (possibly?) visualization
+* ```dnn-mode-connectivity``` - initial clone of https://github.com/timgaripov/dnn-mode-connectivity with applied changes to make it run and more added features
 * ```materials.md``` - list of interesting resources encountered during research
 
 Thesis' LaTeX is available here: https://www.overleaf.com/read/kbknycqgpdkw
