@@ -8,7 +8,7 @@ import torch.nn as nn
 
 import curves
 
-__all__ = ['PreResNet110', 'PreResNet164']
+__all__ = ['PreResNet110', 'PreResNet164', 'PreResNet56', 'PreResNet2', 'PreResNet218']
 
 
 def conv3x3(in_planes, out_planes, stride=1):
@@ -307,3 +307,21 @@ class PreResNet164:
     base = PreResNetBase
     curve = PreResNetCurve
     kwargs = {'depth': 164}
+
+
+class PreResNet56:
+    base = PreResNetBase
+    curve = PreResNetCurve
+    kwargs = {'depth': 56}
+
+
+class PreResNet2:
+    base = PreResNetBase
+    curve = PreResNetCurve
+    kwargs = {'depth': 2}
+
+
+class PreResNet218:
+    base = PreResNetBase
+    curve = PreResNetCurve
+    kwargs = {'depth': 218}

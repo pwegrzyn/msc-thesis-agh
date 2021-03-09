@@ -1,0 +1,1 @@
+train.py --dir=results_preresnet_2_cifar10/checkpoints_curve --dataset=CIFAR10 --transform=ResNet --data_path=data --model=PreResNet2 --curve=Bezier --num_bends=3 --init_start=results_preresnet_2_cifar10/checkpoints/checkpoint-200.pt --init_end=results_preresnet_2_cifar10/checkpoints2/checkpoint-200.pt --fix_start --fix_end --epochs=200 --lr=0.03 --wd=1e-4 --batch_size=128
