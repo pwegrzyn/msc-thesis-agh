@@ -33,6 +33,9 @@ def set_weights(net, weights, directions=None, step=None):
         if len(directions) == 2:
             dx = directions[0]
             dy = directions[1]
+            #print(11111, dx, dy)
+            #print(22222, step)
+            # (PW) step[0], step[1] changed to step
             changes = [d0*step[0] + d1*step[1] for (d0, d1) in zip(dx, dy)]
         else:
             changes = [d*step for d in directions[0]]
@@ -284,15 +287,15 @@ def name_direction_file(args):
     if file2:
         # 1D linear interpolation between two models
         assert exists(file2), file2 + " does not exist!"
-        if file1[:file1.rfind('/')] == file2[:file2.rfind('/')]:
+        if file1[:file1.rfind('\\')] == file2[:file2.rfind('\\')]:
             # model_file and model_file2 are under the same folder
-            dir_file += file1 + '_' + file2[file2.rfind('/')+1:]
+            dir_file += file1 + '_' + file2[file2.rfind('\\')+1:]
         else:
             # model_file and model_file2 are under different folders
             prefix = commonprefix([file1, file2])
-            prefix = prefix[0:prefix.rfind('/')]
-            dir_file += file1[:file1.rfind('/')] + '_' + file1[file1.rfind('/')+1:] + '_' + \
-                       file2[len(prefix)+1: file2.rfind('/')] + '_' + file2[file2.rfind('/')+1:]
+            prefix = prefix[0:prefix.rfind('\\')]
+            dir_file += file1[:file1.rfind('\\')] + '_' + file1[file1.rfind('\\')+1:] + '_' + \
+                       file2[len(prefix)+1: file2.rfind('\\')] + '_' + file2[file2.rfind('\\')+1:]
     else:
         dir_file += file1
 
@@ -306,11 +309,11 @@ def name_direction_file(args):
     if args.y:
         if file3:
             assert exists(file3), "%s does not exist!" % file3
-            if file1[:file1.rfind('/')] == file3[:file3.rfind('/')]:
+            if file1[:file1.rfind('\\')] == file3[:file3.rfind('\\')]:
                dir_file += file3
             else:
                # model_file and model_file3 are under different folders
-               dir_file += file3[:file3.rfind('/')] + '_' + file3[file3.rfind('/')+1:]
+               dir_file += file3[:file3.rfind('\\')] + '_' + file3[file3.rfind('\\')+1:]
         else:
             if args.yignore:
                 dir_file += '_yignore=' + args.yignore

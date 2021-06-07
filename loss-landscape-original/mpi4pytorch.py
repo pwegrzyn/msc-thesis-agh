@@ -4,7 +4,9 @@
 """
 
 import numpy as np
-import mpi4py
+# (PW) commented out, as openmpi possibly will not be used
+# import mpi4py
+
 
 def setup_MPI():
     try:

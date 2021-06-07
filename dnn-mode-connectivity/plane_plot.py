@@ -6,6 +6,7 @@ import matplotlib.colors as colors
 import os
 import seaborn as sns
 
+
 parser = argparse.ArgumentParser(description='Plane visualization')
 parser.add_argument('--dir', type=str, default='/tmp/curve/', metavar='DIR',
                     help='training directory (default: None)')

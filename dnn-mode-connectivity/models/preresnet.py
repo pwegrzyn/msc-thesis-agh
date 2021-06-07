@@ -8,7 +8,9 @@ import torch.nn as nn
 
 import curves
 
-__all__ = ['PreResNet110', 'PreResNet164', 'PreResNet56', 'PreResNet2', 'PreResNet218']
+# REMEMBER TO sync all updates to this file to loss-landscape-original\cifar10\models\preresnet !!!
+
+__all__ = ['PreResNet110', 'PreResNet164', 'PreResNet56', 'PreResNet2', 'PreResNet218', 'PreResNet272']
 
 
 def conv3x3(in_planes, out_planes, stride=1):
@@ -177,17 +179,35 @@ class PreResNetBase(nn.Module):
             assert (depth - 2) % 6 == 0, 'depth should be 6n+2'
             n = (depth - 2) // 6
             block = BasicBlock
-
-        self.inplanes = 16
-        self.conv1 = nn.Conv2d(3, 16, kernel_size=3, padding=1,
+        
+        # Change # of layers, decrease filters, to keep parameters roughly constant.
+        # Only makes sense for >= 56 depth.
+        N_FOR_PRERESNET56 = 6
+        number_of_filters_scaling_factor = math.sqrt(N_FOR_PRERESNET56 / n)
+        self.inplanes = int(16 * number_of_filters_scaling_factor)
+        self.conv1 = nn.Conv2d(3, int(16 * number_of_filters_scaling_factor), kernel_size=3, padding=1,
                                bias=False)
-        self.layer1 = self._make_layer(block, 16, n)
-        self.layer2 = self._make_layer(block, 32, n, stride=2)
-        self.layer3 = self._make_layer(block, 64, n, stride=2)
-        self.bn = nn.BatchNorm2d(64 * block.expansion)
+        self.layer1 = self._make_layer(block, int(16 * number_of_filters_scaling_factor), n)
+        self.layer2 = self._make_layer(block, int(32 * number_of_filters_scaling_factor), n, stride=2)
+        self.layer3 = self._make_layer(block, int(64 * number_of_filters_scaling_factor), n, stride=2)
+        self.bn = nn.BatchNorm2d(int(64 * number_of_filters_scaling_factor) * block.expansion)
         self.relu = nn.ReLU(inplace=True)
-        self.avgpool = nn.AvgPool2d(8)
-        self.fc = nn.Linear(64 * block.expansion, num_classes)
+        self.avgpool = nn.AvgPool2d(int(8 * number_of_filters_scaling_factor))
+        if depth == 164:
+            self.fc = nn.Linear(144 * block.expansion, num_classes)
+        else:
+            self.fc = nn.Linear(int(64 * number_of_filters_scaling_factor) * block.expansion, num_classes)
+
+        # self.inplanes = 16
+        # self.conv1 = nn.Conv2d(3, 16, kernel_size=3, padding=1,
+        #                        bias=False)
+        # self.layer1 = self._make_layer(block, 16, n)
+        # self.layer2 = self._make_layer(block, 32, n, stride=2)
+        # self.layer3 = self._make_layer(block, 64, n, stride=2)
+        # self.bn = nn.BatchNorm2d(64 * block.expansion)
+        # self.relu = nn.ReLU(inplace=True)
+        # self.avgpool = nn.AvgPool2d(8)
+        # self.fc = nn.Linear(64 * block.expansion, num_classes)
 
         for m in self.modules():
             if isinstance(m, nn.Conv2d):
@@ -242,16 +262,35 @@ class PreResNetCurve(nn.Module):
             n = (depth - 2) // 6
             block = BasicBlockCurve
 
-        self.inplanes = 16
-        self.conv1 = curves.Conv2d(3, 16, kernel_size=3, padding=1,
+        # Change # of layers, decrease filters, to keep parameters roughly constant.
+        # Only makes sense for >= 56 depth.
+        N_FOR_PRERESNET56 = 6
+        number_of_filters_scaling_factor = math.sqrt(N_FOR_PRERESNET56 / n)
+        self.inplanes = int(16 * number_of_filters_scaling_factor)
+        self.conv1 = curves.Conv2d(3, int(16 * number_of_filters_scaling_factor), kernel_size=3, padding=1,
                                    bias=False, fix_points=fix_points)
-        self.layer1 = self._make_layer(block, 16, n, fix_points=fix_points)
-        self.layer2 = self._make_layer(block, 32, n, stride=2, fix_points=fix_points)
-        self.layer3 = self._make_layer(block, 64, n, stride=2, fix_points=fix_points)
-        self.bn = curves.BatchNorm2d(64 * block.expansion, fix_points=fix_points)
+        self.layer1 = self._make_layer(block, int(16 * number_of_filters_scaling_factor), n, fix_points=fix_points)
+        self.layer2 = self._make_layer(block, int(32 * number_of_filters_scaling_factor), n, stride=2, fix_points=fix_points)
+        self.layer3 = self._make_layer(block, int(64 * number_of_filters_scaling_factor), n, stride=2, fix_points=fix_points)
+        self.bn = curves.BatchNorm2d(int(64 * number_of_filters_scaling_factor) * block.expansion, fix_points=fix_points)
         self.relu = nn.ReLU(inplace=True)
-        self.avgpool = nn.AvgPool2d(8)
-        self.fc = curves.Linear(64 * block.expansion, num_classes, fix_points=fix_points)
+        self.avgpool = nn.AvgPool2d(int(8 * number_of_filters_scaling_factor))
+        # self.fc = curves.Linear(int(64 * number_of_filters_scaling_factor) * block.expansion, num_classes, fix_points=fix_points)
+        if depth == 164:
+            self.fc = curves.Linear(144 * block.expansion, num_classes, fix_points=fix_points)
+        else:
+            self.fc = curves.Linear(int(64 * number_of_filters_scaling_factor) * block.expansion, num_classes, fix_points=fix_points)
+        
+        # self.inplanes = 16
+        # self.conv1 = curves.Conv2d(3, 16, kernel_size=3, padding=1,
+        #                            bias=False, fix_points=fix_points)
+        # self.layer1 = self._make_layer(block, 16, n, fix_points=fix_points)
+        # self.layer2 = self._make_layer(block, 32, n, stride=2, fix_points=fix_points)
+        # self.layer3 = self._make_layer(block, 64, n, stride=2, fix_points=fix_points)
+        # self.bn = curves.BatchNorm2d(64 * block.expansion, fix_points=fix_points)
+        # self.relu = nn.ReLU(inplace=True)
+        # self.avgpool = nn.AvgPool2d(8)
+        # self.fc = curves.Linear(64 * block.expansion, num_classes, fix_points=fix_points)
 
         for m in self.modules():
             if isinstance(m, curves.Conv2d):
@@ -325,3 +364,9 @@ class PreResNet218:
     base = PreResNetBase
     curve = PreResNetCurve
     kwargs = {'depth': 218}
+
+
+class PreResNet272:
+    base = PreResNetBase
+    curve = PreResNetCurve
+    kwargs = {'depth': 272}

@@ -10,6 +10,9 @@ by Hao Li, Zheng Xu, Gavin Taylor, Christoph Studer, Tom Goldstein
 
 Later work on the baseline code has been made by Patryk Wegrzyn as part of Master's Thesis.
 
+Additional info:
+ - MSVC++ 14.0 required for mpi4py (and MPI 3.1.2), although possibly MPI will not be used
+
 # Visualizing the Loss Landscape of Neural Nets
 
 

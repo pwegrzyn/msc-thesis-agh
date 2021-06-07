@@ -1,0 +1,12 @@
+Executed commands:
+python plot_surface.py --cuda --model_file=C:\Users\patry\Desktop\magisterka\msc-thesis-agh\dnn-mode-connectivity\results_preresnet_CP_56_cifar10\checkpoints\checkpoint-200.pt --model_file2=C:\Users\patry\Desktop\magisterka\msc-thesis-agh\dnn-mode-connectivity\results_preresnet_CP_56_cifar10\checkpoints2\checkpoint-200.pt --plot --model=preresnet56
+(output in C:\Users\patry\Desktop\magisterka\msc-thesis-agh\dnn-mode-connectivity\results_preresnet_CP_56_cifar10; moved to 1d_visualization);
+
+python plot_surface.py --cuda --model_file=C:\Users\patry\Desktop\magisterka\msc-thesis-agh\dnn-mode-connectivity\results_preresnet_CP_56_cifar10\checkpoints\checkpoint-200.pt --plot --model=preresnet56 --dir_type=weights --xnorm=filter --xignore=biasbn
+(output in C:\Users\patry\Desktop\magisterka\msc-thesis-agh\dnn-mode-connectivity\results_preresnet_CP_56_cifar10\checkpoints; moved to 1d_visualization);
+
+python plot_surface.py --cuda --model_file=C:\Users\patry\Desktop\magisterka\msc-thesis-agh\dnn-mode-connectivity\results_preresnet_CP_56_cifar10\checkpoints\checkpoint-200.pt --plot --model=preresnet56 --dir_type=weights --xnorm=filter --xignore=biasbn --ynorm=filter --yignore=biasbn --y=-1:1:15 --x=-1:1:15
+(output in C:\Users\patry\Desktop\magisterka\msc-thesis-agh\dnn-mode-connectivity\results_preresnet_CP_56_cifar10\checkpoints)
+
+python h52vtp.py --surf_file=C:\Users\patry\Desktop\magisterka\msc-thesis-agh\dnn-mode-connectivity\results_preresnet_CP_56_cifar10\checkpoints\checkpoint-200.pt_weights_xignore=biasbn_xnorm=filter_yignore=biasbn_ynorm=filter.h5_[-1.0,1.0,15]x[-1.0,1.0,15].h5 --surf_name=train_loss --zmax=10 --log
+(produces a vtp file that can be loaded to ParaView, here you can export it as an image)

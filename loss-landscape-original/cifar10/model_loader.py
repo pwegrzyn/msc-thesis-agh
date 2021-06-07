@@ -4,6 +4,8 @@ import cifar10.models.vgg as vgg
 import cifar10.models.resnet as resnet
 import cifar10.models.densenet as densenet
 
+import cifar10.models.preresnet as preresnet
+
 # map between model name and function
 models = {
     'vgg9'                  : vgg.VGG9,
@@ -35,6 +37,8 @@ models = {
     'wrn56_8_noshort'       : resnet.WRN56_8_noshort,
     'wrn110_2_noshort'      : resnet.WRN110_2_noshort,
     'wrn110_4_noshort'      : resnet.WRN110_4_noshort,
+    # My models from dnn-mode-connectivity (for CIFAR10)
+    'preresnet56'           : preresnet.PreResNet56
 }
 
 def load(model_name, model_file=None, data_parallel=False):
@@ -45,7 +49,11 @@ def load(model_name, model_file=None, data_parallel=False):
     if model_file:
         assert os.path.exists(model_file), model_file + " does not exist."
         stored = torch.load(model_file, map_location=lambda storage, loc: storage)
-        if 'state_dict' in stored.keys():
+
+        # (PW) change to allow loading modules trained using dnn-mode-connectivity
+        if 'model_state' in stored.keys():
+            net.load_state_dict(stored['model_state'])
+        elif 'state_dict' in stored.keys():
             net.load_state_dict(stored['state_dict'])
         else:
             net.load_state_dict(stored)
