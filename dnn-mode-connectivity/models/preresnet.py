@@ -195,6 +195,8 @@ class PreResNetBase(nn.Module):
         self.avgpool = nn.AvgPool2d(int(8 * number_of_filters_scaling_factor))
         if depth == 164:
             self.fc = nn.Linear(144 * block.expansion, num_classes)
+        elif depth == 218:
+            self.fc = nn.Linear(128 * block.expansion, num_classes)
         else:
             self.fc = nn.Linear(int(64 * number_of_filters_scaling_factor) * block.expansion, num_classes)
 
@@ -244,6 +246,7 @@ class PreResNetBase(nn.Module):
 
         x = self.avgpool(x)
         x = x.view(x.size(0), -1)
+        #print(222222, x.shape)
         x = self.fc(x)
 
         return x
@@ -278,6 +281,8 @@ class PreResNetCurve(nn.Module):
         # self.fc = curves.Linear(int(64 * number_of_filters_scaling_factor) * block.expansion, num_classes, fix_points=fix_points)
         if depth == 164:
             self.fc = curves.Linear(144 * block.expansion, num_classes, fix_points=fix_points)
+        elif depth == 218:
+            self.fc = curves.Linear(128 * block.expansion, num_classes, fix_points=fix_points)
         else:
             self.fc = curves.Linear(int(64 * number_of_filters_scaling_factor) * block.expansion, num_classes, fix_points=fix_points)
         

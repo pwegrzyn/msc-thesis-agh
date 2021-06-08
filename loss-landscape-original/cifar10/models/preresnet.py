@@ -113,6 +113,8 @@ class PreResNetBase(nn.Module):
         self.avgpool = nn.AvgPool2d(int(8 * number_of_filters_scaling_factor))
         if depth == 164:
             self.fc = nn.Linear(144 * block.expansion, num_classes)
+        elif depth == 218:
+            self.fc = nn.Linear(128 * block.expansion, num_classes)
         else:
             self.fc = nn.Linear(int(64 * number_of_filters_scaling_factor) * block.expansion, num_classes)
 

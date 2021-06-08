@@ -6,7 +6,7 @@ This repository contains a PyTorch implementation of the curve-finding and Fast 
 
 by Timur Garipov, Pavel Izmailov, Dmitrii Podoprikhin, Dmitry Vetrov and Andrew Gordon Wilson (NIPS 2018, Spotlight).
 
-Later work on the baseline code has been made by Patryk Wegrzyn as part of Master's Thesis.
+Later work on the baseline code has been made by Patryk Wegrzyn as part of Master's Thesis (under BSD 2-Clause License permission).
 
 
 # Tested environment and dependencies
