@@ -108,4 +108,4 @@ if __name__ == "__main__":
     print("-" * 80 + "\n")
 
     print("Extended model summary (from torchinfo):")
-    summary(model)
+    summary(model, input_size=(128, 3, 32, 32))

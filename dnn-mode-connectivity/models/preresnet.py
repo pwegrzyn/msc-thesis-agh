@@ -197,6 +197,8 @@ class PreResNetBase(nn.Module):
             self.fc = nn.Linear(144 * block.expansion, num_classes)
         elif depth == 218:
             self.fc = nn.Linear(128 * block.expansion, num_classes)
+        elif depth == 272:
+            self.fc = nn.Linear(112 * block.expansion, num_classes)
         else:
             self.fc = nn.Linear(int(64 * number_of_filters_scaling_factor) * block.expansion, num_classes)
 
@@ -283,6 +285,8 @@ class PreResNetCurve(nn.Module):
             self.fc = curves.Linear(144 * block.expansion, num_classes, fix_points=fix_points)
         elif depth == 218:
             self.fc = curves.Linear(128 * block.expansion, num_classes, fix_points=fix_points)
+        elif depth == 272:
+            self.fc = curves.Linear(112 * block.expansion, num_classes, fix_points=fix_points)
         else:
             self.fc = curves.Linear(int(64 * number_of_filters_scaling_factor) * block.expansion, num_classes, fix_points=fix_points)
         
