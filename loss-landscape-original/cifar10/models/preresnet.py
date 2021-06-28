@@ -115,6 +115,8 @@ class PreResNetBase(nn.Module):
             self.fc = nn.Linear(144 * block.expansion, num_classes)
         elif depth == 218:
             self.fc = nn.Linear(128 * block.expansion, num_classes)
+        elif depth == 272:
+            self.fc = nn.Linear(112 * block.expansion, num_classes)
         else:
             self.fc = nn.Linear(int(64 * number_of_filters_scaling_factor) * block.expansion, num_classes)
 
@@ -172,3 +174,8 @@ class PreResNetBase(nn.Module):
 def PreResNet56():
     # for CIFAR10
     return PreResNetBase(num_classes=10, depth=56)
+
+
+def PreResNet272():
+    # for CIFAR10
+    return PreResNetBase(num_classes=10, depth=272)

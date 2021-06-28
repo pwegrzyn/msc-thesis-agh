@@ -57,7 +57,7 @@ def plane(grid, values, vmax=None, log_alpha=-5, N=7, cmap='jet_r'):
     contourf = plt.contourf(grid[:, :, 0], grid[:, :, 1], values, cmap=cmap, norm=norm,
                             levels=levels,
                             zorder=0,
-                            alpha=0.55)
+                            alpha=0.25)
     colorbar = plt.colorbar(format='%.2g')
     labels = list(colorbar.ax.get_yticklabels())
     labels[-1].set_text(r'$>\,$' + labels[-2].get_text())
@@ -77,16 +77,17 @@ contour, contourf, colorbar = plane(
 bend_coordinates = file['bend_coordinates']
 curve_coordinates = file['curve_coordinates']
 
-plt.scatter(bend_coordinates[[0, 2], 0], bend_coordinates[[0, 2], 1], marker='o', c='k', s=120, zorder=2)
-plt.scatter(bend_coordinates[1, 0], bend_coordinates[1, 1], marker='D', c='k', s=120, zorder=2)
-plt.plot(curve_coordinates[:, 0], curve_coordinates[:, 1], linewidth=4, c='k', label='$w(t)$', zorder=4)
-plt.plot(bend_coordinates[[0, 2], 0], bend_coordinates[[0, 2], 1], c='k', linestyle='--', dashes=(3, 4), linewidth=3, zorder=2)
+plt.scatter(bend_coordinates[[0, 2], 0], bend_coordinates[[0, 2], 1], marker='o', c='green', s=120, zorder=2)
+#plt.scatter(bend_coordinates[1, 0], bend_coordinates[1, 1], marker='D', c='k', s=120, zorder=2)
+plt.plot(curve_coordinates[:, 0], curve_coordinates[:, 1], linewidth=6, linestyle='--', c='green', label='$w(t)$ - found Bezier curve', zorder=4)
+#plt.plot(bend_coordinates[[0, 2], 0], bend_coordinates[[0, 2], 1], c='k', linestyle='--', dashes=(3, 4), linewidth=5, zorder=2)
 
 plt.margins(0.0)
 plt.yticks(fontsize=18)
 plt.xticks(fontsize=18)
 colorbar.ax.tick_params(labelsize=18)
-plt.savefig(os.path.join(args.dir, 'train_loss_plane.pdf'), format='pdf', bbox_inches='tight')
+plt.legend(loc="upper left")
+plt.savefig(os.path.join(args.dir, 'train_loss_plane_c.pdf'), format='pdf', bbox_inches='tight')
 plt.show()
 
 plt.figure(figsize=(12.4, 7))
@@ -102,14 +103,15 @@ contour, contourf, colorbar = plane(
 bend_coordinates = file['bend_coordinates']
 curve_coordinates = file['curve_coordinates']
 
-plt.scatter(bend_coordinates[[0, 2], 0], bend_coordinates[[0, 2], 1], marker='o', c='k', s=120, zorder=2)
-plt.scatter(bend_coordinates[1, 0], bend_coordinates[1, 1], marker='D', c='k', s=120, zorder=2)
-plt.plot(curve_coordinates[:, 0], curve_coordinates[:, 1], linewidth=4, c='k', label='$w(t)$', zorder=4)
-plt.plot(bend_coordinates[[0, 2], 0], bend_coordinates[[0, 2], 1], c='k', linestyle='--', dashes=(3, 4), linewidth=3, zorder=2)
+plt.scatter(bend_coordinates[[0, 2], 0], bend_coordinates[[0, 2], 1], marker='o', c='green', s=120, zorder=2)
+#plt.scatter(bend_coordinates[1, 0], bend_coordinates[1, 1], marker='D', c='k', s=120, zorder=2)
+plt.plot(curve_coordinates[:, 0], curve_coordinates[:, 1], linewidth=6, linestyle='--', c='green', label='$w(t)$ - found Bezier curve', zorder=4)
+#plt.plot(bend_coordinates[[0, 2], 0], bend_coordinates[[0, 2], 1], c='k', linestyle='--', dashes=(3, 4), linewidth=5, zorder=2)
 
 plt.margins(0.0)
 plt.yticks(fontsize=18)
 plt.xticks(fontsize=18)
 colorbar.ax.tick_params(labelsize=18)
-plt.savefig(os.path.join(args.dir, 'test_error_plane.pdf'), format='pdf', bbox_inches='tight')
+plt.legend(loc="upper left")
+plt.savefig(os.path.join(args.dir, 'test_error_plane_c.pdf'), format='pdf', bbox_inches='tight')
 plt.show()

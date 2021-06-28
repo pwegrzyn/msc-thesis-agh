@@ -38,7 +38,8 @@ models = {
     'wrn110_2_noshort'      : resnet.WRN110_2_noshort,
     'wrn110_4_noshort'      : resnet.WRN110_4_noshort,
     # My models from dnn-mode-connectivity (for CIFAR10)
-    'preresnet56'           : preresnet.PreResNet56
+    'preresnet56'           : preresnet.PreResNet56,
+    'preresnet272'          : preresnet.PreResNet272
 }
 
 def load(model_name, model_file=None, data_parallel=False):
